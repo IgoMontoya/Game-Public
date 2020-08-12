@@ -27,7 +27,6 @@ def characters():
     """ good ole enumerate, makes a list that doesn't respect order and 
         forces it to give me an index that I can use. What a scrub """
     for index, player in enumerate(players):
-        print(player)
         """ Nerdage Moment: when you are asking someone a Yes or No Question in the terminal it's
             a good idea to specify the expected inputs. In this case the Y is capitalized so that 
             the user will know that is the default... I spend WAAAAAAY to much time in the Terminal"""
@@ -38,6 +37,8 @@ def characters():
             this solution will assume that ANY input is valid other than N or n """
         if playerCreate.lower() == "n":
             print("well I don't know how you intend to play then")
+            """ Continue is a handy way to cease executing the current step in the loop without
+                actually breaking out of the loop """
             continue
 
         getCharName = input("Enter Next Char name ")
@@ -60,7 +61,11 @@ def characters():
         newCharacter.printSummary()
         playerCharacters.append(newCharacter)
 
-
+    print("Summary ==========================")
+    for player in playerCharacters:
+        print("{playerName} is {characterName}".format(
+            playerName=player.playerName,
+            characterName=player.name ))
     return
 ### We are going to treat a character as an object because specific outcomes would happen to a
 ### particular character. It doesn't quite make sense to iterate through a list of dicts
@@ -83,8 +88,6 @@ class Character:
     """ This is called when we declare a new character, 
         we need to pass the data from another function"""
     def __init__(self, characterData):
-        print(characterData)
-
         """ I am going to assume that characterData is a dictionary of values that should
             be applied to a character. I would use kwargs, but that may be a bit confusing."""
         
